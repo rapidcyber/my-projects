@@ -1,16 +1,31 @@
 <template>
-  <div class="min-h-screen bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-white transition-colors">
-    <header class="bg-white dark:bg-gray-800 shadow p-6 flex justify-between items-center">
-      <h1 class="text-3xl font-bold text-blue-700 dark:text-blue-300">Jun's Project Showcase</h1>
-    </header>
-    <main class="p-6">
-      <Home />
+  <div class="app-shell">
+    <NavBar />
+    <main>
+      <Hero />
+      <About />
+      <Projects />
+      <Skills />
+      <Contact />
     </main>
+    <AppFooter />
   </div>
 </template>
 
 <script setup lang="ts">
-import Home from './pages/Home.vue'
+import NavBar from './components/NavBar.vue'
+import Hero from './components/Hero.vue'
+import About from './components/About.vue'
+import Projects from './components/Projects.vue'
+import Skills from './components/Skills.vue'
+import Contact from './components/Contact.vue'
+import AppFooter from './components/AppFooter.vue'
 </script>
 
-<style scoped></style>
+<style scoped>
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+</style>
