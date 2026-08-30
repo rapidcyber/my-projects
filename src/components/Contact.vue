@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const email = 'jun@aipaygo.com'
+const email = 'jun.barcellano@gmail.com'
 const copied = ref(false)
 
 async function copyEmail() {
