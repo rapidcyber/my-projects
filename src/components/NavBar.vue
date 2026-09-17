@@ -11,6 +11,7 @@
 
       <nav class="nav__links nav__links--desktop">
         <a v-for="link in links" :key="link.href" :href="link.href">{{ link.label }}</a>
+        <a :href="resumeUrl" target="_blank" rel="noopener">Resume</a>
       </nav>
 
       <div class="nav__actions">
@@ -24,6 +25,7 @@
     <Transition name="slide-down">
       <nav v-if="menuOpen" class="nav__links nav__links--mobile">
         <a v-for="link in links" :key="link.href" :href="link.href" @click="closeMenu">{{ link.label }}</a>
+        <a :href="resumeUrl" target="_blank" rel="noopener" @click="closeMenu">Resume</a>
       </nav>
     </Transition>
   </header>
@@ -32,6 +34,8 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import ThemeToggle from './ThemeToggle.vue'
+
+const resumeUrl = `${import.meta.env.BASE_URL}resume.html`
 
 const links = [
   { href: '#about', label: 'About' },

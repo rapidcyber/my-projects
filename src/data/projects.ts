@@ -1,9 +1,18 @@
+import logoJayride from '../assets/logos/jayride.png'
+import logoSmudge from '../assets/logos/smudge.png'
+import logoVestinit from '../assets/logos/vestinit.png'
+import logoRepublisys from '../assets/logos/republisys.png'
+
+export type WorkIconName = 'hrms' | 'expenses' | 'restaurant' | 'water'
+
 export interface Project {
   title: string
   description: string
   tags: string[]
   category: 'systems' | 'products'
   accent: string
+  logo?: string
+  icon?: WorkIconName
   link?: string
 }
 
@@ -18,6 +27,7 @@ export const projects: Project[] = [
     tags: ['Vue', 'Node.js', 'SQL'],
     category: 'systems',
     accent: 'linear-gradient(135deg,#4f46e5,#22d3ee)',
+    icon: 'hrms',
   },
   {
     title: 'Expenses Management System',
@@ -25,6 +35,7 @@ export const projects: Project[] = [
     tags: ['TypeScript', 'REST API'],
     category: 'systems',
     accent: 'linear-gradient(135deg,#f97316,#f43f5e)',
+    icon: 'expenses',
   },
   {
     title: 'Restaurant POS',
@@ -32,6 +43,7 @@ export const projects: Project[] = [
     tags: ['POS', 'Realtime'],
     category: 'systems',
     accent: 'linear-gradient(135deg,#ef4444,#f59e0b)',
+    icon: 'restaurant',
   },
   {
     title: 'Water Refilling Station POS',
@@ -39,6 +51,7 @@ export const projects: Project[] = [
     tags: ['POS', 'CRM'],
     category: 'systems',
     accent: 'linear-gradient(135deg,#06b6d4,#3b82f6)',
+    icon: 'water',
   },
   {
     title: 'Jayride Platform',
@@ -46,13 +59,7 @@ export const projects: Project[] = [
     tags: ['Android', 'iOS', 'Vue'],
     category: 'products',
     accent: 'linear-gradient(135deg,#7c3aed,#22d3ee)',
-  },
-  {
-    title: 'AiPAYGO',
-    description: 'Modern payments and business tooling — in active development.',
-    tags: ['Fintech', 'Product'],
-    category: 'products',
-    accent: 'linear-gradient(135deg,#4f46e5,#0891b2)',
+    logo: logoJayride,
   },
   {
     title: 'Smudge TV',
@@ -60,6 +67,7 @@ export const projects: Project[] = [
     tags: ['Media', 'Web'],
     category: 'products',
     accent: 'linear-gradient(135deg,#ec4899,#8b5cf6)',
+    logo: logoSmudge,
   },
   {
     title: 'Vestinit Ventures',
@@ -67,6 +75,7 @@ export const projects: Project[] = [
     tags: ['Corporate site'],
     category: 'products',
     accent: 'linear-gradient(135deg,#0ea5e9,#22c55e)',
+    logo: logoVestinit,
   },
   {
     title: 'Republisys',
@@ -74,5 +83,6 @@ export const projects: Project[] = [
     tags: ['Web'],
     category: 'products',
     accent: 'linear-gradient(135deg,#64748b,#334155)',
+    logo: logoRepublisys,
   },
 ]

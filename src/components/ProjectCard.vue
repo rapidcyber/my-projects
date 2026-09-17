@@ -1,6 +1,12 @@
 <template>
   <article class="card">
-    <div class="card__cover" :style="{ background: accent }">
+    <div v-if="logo" class="card__cover card__cover--logo">
+      <img :src="logo" :alt="`${title} logo`" class="card__logo" loading="lazy" />
+    </div>
+    <div v-else-if="icon" class="card__cover" :style="{ background: accent }">
+      <WorkIcon :name="icon" />
+    </div>
+    <div v-else class="card__cover" :style="{ background: accent }">
       <span class="card__initials">{{ initials }}</span>
     </div>
     <div class="card__body">
@@ -15,12 +21,16 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import WorkIcon from './icons/WorkIcon.vue'
+import type { WorkIconName } from '../data/projects'
 
 const props = defineProps<{
   title: string
   description: string
   tags: string[]
   accent: string
+  logo?: string
+  icon?: WorkIconName
 }>()
 
 const initials = computed(() =>
@@ -64,6 +74,20 @@ const initials = computed(() =>
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.25) 100%);
+}
+
+.card__cover--logo {
+  background: #eef0f6;
+}
+
+.card__cover--logo::after {
+  content: none;
+}
+
+.card__logo {
+  max-width: 68%;
+  max-height: 60%;
+  object-fit: contain;
 }
 
 .card__initials {

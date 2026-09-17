@@ -26,6 +26,7 @@
       <div class="hero__actions animate-fade-up" style="animation-delay:.32s">
         <a href="#work" class="btn btn-primary">View my work</a>
         <a href="#contact" class="btn btn-ghost">Get in touch</a>
+        <a :href="resumeUrl" target="_blank" rel="noopener" class="btn btn-ghost">View resume</a>
       </div>
 
       <div class="hero__scroll" aria-hidden="true">
@@ -38,10 +39,11 @@
 <script setup lang="ts">
 import { useTypewriter } from '../composables/useTypewriter'
 
+const resumeUrl = `${import.meta.env.BASE_URL}resume.html`
+
 const { text } = useTypewriter([
   'Full-Stack Engineer',
   'Product Builder',
-  'Founder @ AiPAYGO',
   'Systems Architect',
 ])
 </script>
