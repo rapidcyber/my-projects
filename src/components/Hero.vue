@@ -8,8 +8,39 @@
       <span class="hero__beam hero__beam--a"></span>
       <span class="hero__beam hero__beam--b"></span>
       <span class="hero__beam hero__beam--c"></span>
+      <svg class="hero__circuit" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+        <g class="hero__traces">
+          <path d="M-20 130 H240 L300 190 H560" />
+          <path d="M1220 210 H960 L900 270 H660 L620 310 H520" />
+          <path d="M-20 640 H160 L220 580 H470 L530 640 H820" />
+          <path d="M1220 700 H1020 L960 640 H760" />
+          <path d="M300 190 V330 L360 390 H520" />
+          <path d="M900 270 V430 L840 490 H640" />
+        </g>
+        <g class="hero__pulses">
+          <path class="p1" d="M-20 130 H240 L300 190 H560" />
+          <path class="p2" d="M1220 210 H960 L900 270 H660 L620 310 H520" />
+          <path class="p3" d="M-20 640 H160 L220 580 H470 L530 640 H820" />
+          <path class="p4" d="M1220 700 H1020 L960 640 H760" />
+          <path class="p5" d="M300 190 V330 L360 390 H520" />
+          <path class="p6" d="M900 270 V430 L840 490 H640" />
+        </g>
+        <g class="hero__nodes">
+          <circle cx="300" cy="190" r="4" />
+          <circle cx="560" cy="190" r="4" class="n2" />
+          <circle cx="900" cy="270" r="4" class="n3" />
+          <circle cx="220" cy="580" r="4" class="n4" />
+          <circle cx="530" cy="640" r="4" class="n5" />
+          <circle cx="960" cy="640" r="4" class="n6" />
+        </g>
+      </svg>
+      <span class="hero__scanline"></span>
       <span class="hero__noise"></span>
       <span class="hero__fade"></span>
+      <span class="hero__hud hero__hud--tl"></span>
+      <span class="hero__hud hero__hud--tr"></span>
+      <span class="hero__hud hero__hud--bl"></span>
+      <span class="hero__hud hero__hud--br"></span>
     </div>
 
     <div class="container hero__inner">
@@ -137,6 +168,82 @@ const { text } = useTypewriter([
   mix-blend-mode: overlay;
 }
 
+/* Circuit traces with traveling pulses */
+.hero__circuit {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-mask-image: radial-gradient(ellipse 85% 80% at 50% 45%, #000 20%, transparent 85%);
+  mask-image: radial-gradient(ellipse 85% 80% at 50% 45%, #000 20%, transparent 85%);
+}
+
+.hero__traces path {
+  fill: none;
+  stroke: var(--fx-line-strong);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hero__pulses path {
+  fill: none;
+  stroke: var(--accent-2);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 40 1600;
+  filter: drop-shadow(0 0 6px var(--accent-2));
+  animation: circuit-pulse 6s linear infinite;
+}
+
+.hero__pulses .p2 { stroke: var(--accent); filter: drop-shadow(0 0 6px var(--accent)); animation-duration: 7.5s; animation-delay: -2s; }
+.hero__pulses .p3 { animation-duration: 9s; animation-delay: -4s; }
+.hero__pulses .p4 { stroke: var(--accent); filter: drop-shadow(0 0 6px var(--accent)); animation-duration: 6.5s; animation-delay: -1s; }
+.hero__pulses .p5 { animation-duration: 8s; animation-delay: -5.5s; }
+.hero__pulses .p6 { stroke: var(--accent); filter: drop-shadow(0 0 6px var(--accent)); animation-duration: 10s; animation-delay: -3s; }
+
+.hero__nodes circle {
+  fill: var(--accent-2);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: node-blink 3.2s ease-in-out infinite;
+}
+
+.hero__nodes .n2 { animation-delay: -0.6s; }
+.hero__nodes .n3 { animation-delay: -1.2s; fill: var(--accent); }
+.hero__nodes .n4 { animation-delay: -1.8s; }
+.hero__nodes .n5 { animation-delay: -2.4s; fill: var(--accent); }
+.hero__nodes .n6 { animation-delay: -3s; }
+
+/* Sweeping scan line */
+.hero__scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-2), var(--accent), transparent);
+  box-shadow: 0 0 18px 2px var(--ring);
+  opacity: 0.55;
+  animation: hero-sweep 7s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+/* HUD corner brackets */
+.hero__hud {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--accent);
+  opacity: 0.35;
+  animation: hud-flicker 5s ease-in-out infinite;
+}
+
+.hero__hud--tl { top: 92px; left: 24px; border-right: 0; border-bottom: 0; }
+.hero__hud--tr { top: 92px; right: 24px; border-left: 0; border-bottom: 0; animation-delay: -1.2s; }
+.hero__hud--bl { bottom: 28px; left: 24px; border-right: 0; border-top: 0; animation-delay: -2.4s; }
+.hero__hud--br { bottom: 28px; right: 24px; border-left: 0; border-top: 0; animation-delay: -3.6s; }
+
 /* Blend into the next section */
 .hero__fade {
   position: absolute;
@@ -258,6 +365,30 @@ const { text } = useTypewriter([
   50% { transform: translateY(8px); opacity: 1; }
 }
 
+@keyframes circuit-pulse {
+  from { stroke-dashoffset: 1640; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes node-blink {
+  0%, 100% { opacity: 0.25; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@keyframes hero-sweep {
+  0% { transform: translateY(0); opacity: 0; }
+  8% { opacity: 0.55; }
+  92% { opacity: 0.55; }
+  100% { transform: translateY(92vh); opacity: 0; }
+}
+
+@keyframes hud-flicker {
+  0%, 100% { opacity: 0.35; }
+  45% { opacity: 0.6; }
+  50% { opacity: 0.2; }
+  55% { opacity: 0.55; }
+}
+
 @keyframes hero-spin {
   to { transform: rotate(360deg); }
 }
@@ -278,8 +409,15 @@ const { text } = useTypewriter([
   .blob,
   .hero__halo,
   .hero__grid,
-  .hero__beam {
+  .hero__beam,
+  .hero__pulses path,
+  .hero__nodes circle,
+  .hero__scanline,
+  .hero__hud {
     animation: none;
+  }
+  .hero__scanline {
+    opacity: 0;
   }
   .hero__beam {
     opacity: 0.25;
