@@ -1,5 +1,5 @@
 <template>
-  <section id="work" class="section">
+  <section id="work" class="section section--matrix">
     <div class="container">
       <div v-reveal class="work__intro">
         <p class="eyebrow">Selected work</p>

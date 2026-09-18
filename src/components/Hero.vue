@@ -29,9 +29,13 @@
         <a href="resume.html" target="_blank" rel="noopener" class="btn btn-ghost">View resume</a>
       </div>
 
-      <div class="hero__scroll" aria-hidden="true">
-        <span></span>
-      </div>
+      <a href="#about" class="hero__scroll">
+        <span class="hero__scroll-label">Scroll</span>
+        <svg class="hero__scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 4v15" />
+          <path d="M5 13l7 7 7-7" />
+        </svg>
+      </a>
     </div>
   </section>
 </template>
@@ -150,34 +154,46 @@ const { text } = useTypewriter([
 
 .hero__scroll {
   margin-top: 72px;
-  width: 26px;
-  height: 42px;
-  border: 2px solid var(--border);
-  border-radius: 999px;
-  display: flex;
-  justify-content: center;
-  padding-top: 8px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  transition: color 0.25s ease;
 }
 
-.hero__scroll span {
-  width: 4px;
-  height: 8px;
-  border-radius: 999px;
-  background: var(--accent);
-  animation: scroll-dot 1.8s ease-in-out infinite;
+.hero__scroll:hover {
+  color: var(--accent);
 }
 
-@keyframes scroll-dot {
-  0% { transform: translateY(0); opacity: 1; }
-  70% { transform: translateY(14px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 0; }
+.hero__scroll-label {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.hero__scroll-arrow {
+  width: 22px;
+  height: 22px;
+  animation: scroll-bounce 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.hero__scroll:hover .hero__scroll-arrow {
+  filter: drop-shadow(0 0 8px var(--ring));
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.75; }
+  50% { transform: translateY(8px); opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .blob {
     animation: none;
   }
-  .hero__scroll span {
+  .hero__scroll-arrow {
     animation: none;
   }
 }

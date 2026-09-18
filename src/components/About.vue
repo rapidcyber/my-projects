@@ -1,5 +1,5 @@
 <template>
-  <section id="about" class="section">
+  <section id="about" class="section section--circuit">
     <div class="container about">
       <div v-reveal class="about__copy">
         <p class="eyebrow">About</p>

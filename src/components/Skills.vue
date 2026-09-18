@@ -1,5 +1,5 @@
 <template>
-  <section id="skills" class="section section--soft">
+  <section id="skills" class="section section--soft section--blueprint">
     <div class="container">
       <div v-reveal class="skills__intro">
         <p class="eyebrow">Skills</p>

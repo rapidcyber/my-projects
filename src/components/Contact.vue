@@ -1,5 +1,5 @@
 <template>
-  <section id="contact" class="section">
+  <section id="contact" class="section section--horizon">
     <div class="container">
       <div v-reveal class="contact">
         <p class="eyebrow">Contact</p>
