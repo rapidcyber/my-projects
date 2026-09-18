@@ -3,7 +3,13 @@
     <div class="hero__bg" aria-hidden="true">
       <span class="blob blob--one"></span>
       <span class="blob blob--two"></span>
+      <span class="hero__halo"></span>
       <span class="hero__grid"></span>
+      <span class="hero__beam hero__beam--a"></span>
+      <span class="hero__beam hero__beam--b"></span>
+      <span class="hero__beam hero__beam--c"></span>
+      <span class="hero__noise"></span>
+      <span class="hero__fade"></span>
     </div>
 
     <div class="container hero__inner">
@@ -69,13 +75,76 @@ const { text } = useTypewriter([
 
 .hero__grid {
   position: absolute;
-  inset: 0;
+  inset: -10%;
   background-image:
-    linear-gradient(to right, var(--border) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
-  background-size: 64px 64px;
-  opacity: 0.35;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 40%, transparent 90%);
+    linear-gradient(to right, var(--fx-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--fx-line) 1px, transparent 1px),
+    linear-gradient(to right, var(--fx-line-strong) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--fx-line-strong) 1px, transparent 1px);
+  background-size: 40px 40px, 40px 40px, 200px 200px, 200px 200px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 5%, #000 35%, transparent 88%);
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 5%, #000 35%, transparent 88%);
+  animation: hero-grid-drift 40s linear infinite;
+}
+
+/* Rotating halo ring */
+.hero__halo {
+  position: absolute;
+  top: -42%;
+  right: -14%;
+  width: min(820px, 90vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0 48%,
+    var(--accent) 68%,
+    var(--accent-2) 82%,
+    transparent 92% 100%
+  );
+  opacity: 0.28;
+  filter: blur(26px);
+  -webkit-mask-image: radial-gradient(circle, transparent 54%, #000 60%, #000 76%, transparent 80%);
+  mask-image: radial-gradient(circle, transparent 54%, #000 60%, #000 76%, transparent 80%);
+  animation: hero-spin 34s linear infinite;
+}
+
+[data-theme='dark'] .hero__halo {
+  opacity: 0.4;
+}
+
+/* Falling data beams */
+.hero__beam {
+  position: absolute;
+  top: -35%;
+  width: 1px;
+  height: 45%;
+  background: linear-gradient(180deg, transparent, var(--accent-2), transparent);
+  opacity: 0;
+  animation: hero-beam 9s linear infinite;
+}
+
+.hero__beam--a { left: 18%; animation-duration: 8s; animation-delay: -1s; }
+.hero__beam--b { left: 54%; animation-duration: 11s; animation-delay: -5s; }
+.hero__beam--c { left: 79%; animation-duration: 13s; animation-delay: -8s; background: linear-gradient(180deg, transparent, var(--accent), transparent); }
+
+/* Fine grain */
+.hero__noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+}
+
+/* Blend into the next section */
+.hero__fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 22%;
+  background: linear-gradient(180deg, transparent, var(--bg));
 }
 
 .blob {
@@ -189,9 +258,31 @@ const { text } = useTypewriter([
   50% { transform: translateY(8px); opacity: 1; }
 }
 
+@keyframes hero-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes hero-grid-drift {
+  from { background-position: 0 0, 0 0, 0 0, 0 0; }
+  to { background-position: 40px 40px, 40px 40px, 200px 200px, 200px 200px; }
+}
+
+@keyframes hero-beam {
+  0% { transform: translateY(0); opacity: 0; }
+  12% { opacity: 0.55; }
+  70% { opacity: 0.55; }
+  100% { transform: translateY(320%); opacity: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .blob {
+  .blob,
+  .hero__halo,
+  .hero__grid,
+  .hero__beam {
     animation: none;
+  }
+  .hero__beam {
+    opacity: 0.25;
   }
   .hero__scroll-arrow {
     animation: none;
