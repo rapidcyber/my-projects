@@ -1,9 +1,12 @@
-import logoJayride from '../assets/logos/jayride.png'
-import logoSmudge from '../assets/logos/smudge.png'
-import logoVestinit from '../assets/logos/vestinit.png'
-import logoRepublisys from '../assets/logos/republisys.png'
-
-export type WorkIconName = 'hrms' | 'expenses' | 'restaurant' | 'water'
+export type IllustrationName =
+  | 'hrms'
+  | 'expenses'
+  | 'restaurant'
+  | 'water'
+  | 'jayride'
+  | 'smudge'
+  | 'vestinit'
+  | 'republisys'
 
 export interface Project {
   title: string
@@ -11,8 +14,7 @@ export interface Project {
   tags: string[]
   category: 'systems' | 'products'
   accent: string
-  logo?: string
-  icon?: WorkIconName
+  illustration?: IllustrationName
   link?: string
 }
 
@@ -27,7 +29,7 @@ export const projects: Project[] = [
     tags: ['Vue', 'Node.js', 'SQL'],
     category: 'systems',
     accent: 'linear-gradient(135deg,#4f46e5,#22d3ee)',
-    icon: 'hrms',
+    illustration: 'hrms',
   },
   {
     title: 'Expenses Management System',
@@ -35,7 +37,7 @@ export const projects: Project[] = [
     tags: ['TypeScript', 'REST API'],
     category: 'systems',
     accent: 'linear-gradient(135deg,#f97316,#f43f5e)',
-    icon: 'expenses',
+    illustration: 'expenses',
   },
   {
     title: 'Restaurant POS',
@@ -43,7 +45,7 @@ export const projects: Project[] = [
     tags: ['POS', 'Realtime'],
     category: 'systems',
     accent: 'linear-gradient(135deg,#ef4444,#f59e0b)',
-    icon: 'restaurant',
+    illustration: 'restaurant',
   },
   {
     title: 'Water Refilling Station POS',
@@ -51,7 +53,7 @@ export const projects: Project[] = [
     tags: ['POS', 'CRM'],
     category: 'systems',
     accent: 'linear-gradient(135deg,#06b6d4,#3b82f6)',
-    icon: 'water',
+    illustration: 'water',
   },
   {
     title: 'Jayride Platform',
@@ -59,7 +61,7 @@ export const projects: Project[] = [
     tags: ['Android', 'iOS', 'Vue'],
     category: 'products',
     accent: 'linear-gradient(135deg,#7c3aed,#22d3ee)',
-    logo: logoJayride,
+    illustration: 'jayride',
   },
   {
     title: 'Smudge TV',
@@ -67,7 +69,7 @@ export const projects: Project[] = [
     tags: ['Media', 'Web'],
     category: 'products',
     accent: 'linear-gradient(135deg,#ec4899,#8b5cf6)',
-    logo: logoSmudge,
+    illustration: 'smudge',
   },
   {
     title: 'Vestinit Ventures',
@@ -75,7 +77,7 @@ export const projects: Project[] = [
     tags: ['Corporate site'],
     category: 'products',
     accent: 'linear-gradient(135deg,#0ea5e9,#22c55e)',
-    logo: logoVestinit,
+    illustration: 'vestinit',
   },
   {
     title: 'Republisys',
@@ -83,6 +85,6 @@ export const projects: Project[] = [
     tags: ['Web'],
     category: 'products',
     accent: 'linear-gradient(135deg,#64748b,#334155)',
-    logo: logoRepublisys,
+    illustration: 'republisys',
   },
 ]

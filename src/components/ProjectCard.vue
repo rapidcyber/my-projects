@@ -1,12 +1,9 @@
 <template>
   <article class="card">
-    <div v-if="logo" class="card__cover card__cover--logo">
-      <img :src="logo" :alt="`${title} logo`" class="card__logo" loading="lazy" />
+    <div v-if="illustration" class="card__cover" :style="{ background: accent }">
+      <ProjectIllustration :name="illustration" />
     </div>
-    <div v-else-if="icon" class="card__cover" :style="{ background: accent }">
-      <WorkIcon :name="icon" />
-    </div>
-    <div v-else class="card__cover" :style="{ background: accent }">
+    <div v-else class="card__cover card__cover--fallback" :style="{ background: accent }">
       <span class="card__initials">{{ initials }}</span>
     </div>
     <div class="card__body">
@@ -21,16 +18,15 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import WorkIcon from './icons/WorkIcon.vue'
-import type { WorkIconName } from '../data/projects'
+import ProjectIllustration from './illustrations/ProjectIllustration.vue'
+import type { IllustrationName } from '../data/projects'
 
 const props = defineProps<{
   title: string
   description: string
   tags: string[]
   accent: string
-  logo?: string
-  icon?: WorkIconName
+  illustration?: IllustrationName
 }>()
 
 const initials = computed(() =>
@@ -62,32 +58,32 @@ const initials = computed(() =>
 }
 
 .card__cover {
-  height: 128px;
+  aspect-ratio: 2 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden;
 }
 
-.card__cover::after {
+.card__cover--fallback {
+  aspect-ratio: auto;
+  height: 128px;
+}
+
+.card__cover--fallback::after {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.25) 100%);
 }
 
-.card__cover--logo {
-  background: #eef0f6;
+.card__cover :deep(.illustration) {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.card__cover--logo::after {
-  content: none;
-}
-
-.card__logo {
-  max-width: 68%;
-  max-height: 60%;
-  object-fit: contain;
+.card:hover .card__cover :deep(.illustration) {
+  transform: scale(1.06);
 }
 
 .card__initials {

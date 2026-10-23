@@ -13,8 +13,7 @@
         </p>
         <p class="about__paragraph">
           I care most about clean data models, interfaces that get out of the user's way,
-          and shipping something that still works a year later. I currently work on
-          products at <strong>AiPAYGO</strong>, alongside client and venture work.
+          and shipping something that still works a year later.
         </p>
       </div>
 

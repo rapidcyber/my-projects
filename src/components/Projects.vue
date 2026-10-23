@@ -31,8 +31,7 @@
           :description="project.description"
           :tags="project.tags"
           :accent="project.accent"
-          :logo="project.logo"
-          :icon="project.icon"
+          :illustration="project.illustration"
         />
       </TransitionGroup>
     </div>
